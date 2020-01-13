@@ -7,7 +7,47 @@ from collections import namedtuple
 from decimal import Decimal
 
 
-#pylint: disable=missing-docstring
+
+# Codes added by Connor Parish for controls of Harvester cargo ship
+# taken from 142-pilotsea-am-alphapilot-mfm-instruct-manual-interface-tcs-cat-c-5-9-2018_1552316673_362e27eb.pdf
+class ALR(TalkerSentence):
+    fields = (
+        ("Time of Alarm", "time"),
+        ("Alarm number at alarm source", "id"),
+        ("Alarm condition (A: threshold exceeded)", "cond"),
+        ("Alarm acknowledge state (A: acknowledged)", "ack"),
+        ("Alarm description text", "description")
+        )
+
+class HTD(TalkerSentence):
+    fields = (
+        ("Override status (A means in use)", "override"),
+        ("Commanded rudder angle", "rudder_angle", Decimal),
+        ("Rudder angle side (L/R)", "rudder_side"),
+        ("Selected steering mode", "s_mode"),
+        ("Turn mode", "t_mode"),
+        ("Commanded rudder limit", "r_limit", Decimal),
+        ("Commanded off-heading limit", "off_limit", Decimal),
+        ("Commanded radius of turn for heading changes", "rad", Decimal),
+        ("Commanded rate of turn for heading changes", "rot", Decimal),
+        ("Commanded heading to steer", "hts", Decimal),
+        ("Commanded off-track limit", "t_limit", Decimal),
+        ("Comanded track", "track", Decimal),
+        ("Heading reference (T for true and M for magnetic)", "heading_ref"),
+        ("Rudder status (A: within limits and V: limit reached)", "rudder_status"),
+        ("Off-heading status(A:within limit and V:limit reached or exceeded)", "off_heading_status"),
+        ("Off-track status (unused)", "off_track_status")
+        )
+
+class PVD(TalkerSentence):
+    fields = (
+        ("Unknown1", "u1", Decimal),
+        ("Unknown2", "u2", Decimal),
+        ("Unknown3", "u3")
+        )
+
+
+#pylint: disable=missing-docstrings
 #pylint: disable=no-init
 #pylint: disable=too-few-public-methods
 class AAM(TalkerSentence):

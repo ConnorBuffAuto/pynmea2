@@ -1,11 +1,10 @@
 test:
-	python2 -m pytest .
-	python3 -m pytest .
+	python -m pytest .
 
 publish: test
 	rm dist/ -r
-	python3 setup.py sdist
-	python3 setup.py bdist_wheel
-	python3 -m twine upload dist/*
+	python setup.py sdist
+	python setup.py bdist_wheel
+	python -m twine upload dist/*
 
 .PHONY: test publish
